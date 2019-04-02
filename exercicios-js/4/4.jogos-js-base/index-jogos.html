@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogos</title>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="./assets/css/flexbox.css" />
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+</head>
+
+<body>
+
+  <div>
+    <table id="tabela-lista">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Descrição 1</th>
+          <th>Imagem</th>
+          <th>Estúdio</th>
+        </tr>
+      </thead>
+
+      <tbody id="tabela-lista-corpo"></tbody>
+    </table>
+
+    <div class="container" id="conteudoPrincipal-cadastro">
+      <h2 class="conteudoPrincipal-cadastro-titulo">
+        Cadastrar Jogos
+      </h2>
+      <form method="POST" id="form">
+        <div class="container">
+          <input type="text" id="nome-jogo" placeholder="Informe o nome do jogo" />
+          <input type="text" id="urlimagem" placeholder="http://" />
+          <input type="text" id="estudio" placeholder="Informe o nome do estúdio" />
+          <textarea type="text" id="descricao" placeholder="Informe a Descrição do jogo"></textarea>
+
+          <button class="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">
+            Cadastrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    const URL = 'http://5c9cbcf13be4e30014a7d268.mockapi.io/hroads/jogos';
+
+    function carregarListaJogos() {
+
+      fetch(URL, { method: 'GET' }) //Como default é GET, não precisa informar o GET na chamada
+        .then(resposta => resposta.json())//Pega a resposta da API
+        .then(data => cadastrarJogos(data))//Pega os dados da resposta e chama a função para criar tabela
+        .catch(erro => console.log('Erro no Cadastro de Jogos', erro));//Ocorre um erro
+    }    
+
+    let tabela = document.querySelector("#tabela-lista-corpo");
+    let form = document.querySelector("#form");
+
+    carregarListaJogos();
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      debugger;
+      console.log(Jogos);
+      console.log(URL);
+
+      let Jogos = {
+        nome: document.querySelector("#nome-jogo").value,
+        imagem: document.querySelector("#urlimagem").value,
+        descricao: document.querySelector("#estudio").value,
+        estudio: document.querySelector("#descricao").value
+      }
+
+      fetch(URL, {
+        method: 'POST',
+        body: JSON.stringify(Jogos),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(resposta => console.log(resposta))
+        .then(data => carregarListaJogos())
+        .catch(erro => console.log(erro))
+    });
+
+    function cadastrarJogos(Jogos) {
+
+      tabela.innerText = "";
+
+      Jogos.forEach(element => {
+        let linha = document.createElement("tr");
+        let colunaId = document.createElement("td");
+        colunaId.innerText = element.id;
+        let colunaImagem = document.createElement("td");
+        colunaImagem.innerHTML = "<img src=" + "element.urlimagem>";
+        let colunaNome = document.createElement("td");
+        colunaNome.innerText = element.nome;
+        let colunaDescricao = document.createElement("td");
+        colunaDescricao.innerText = element.descricao;
+        let colunaEstudio = document.createElement("td");
+        colunaEstudio.innerText = element.estudio;
+
+        linha.appendChild(colunaId);
+        linha.appendChild(colunaNome);
+        linha.appendChild(colunaDescricao);
+        linha.appendChild(colunaImagem);
+        linha.appendChild(colunaEstudio);
+        tabela.appendChild(linha);
+      });
+    }
+
+
+  </script>
+</body>
+
+</html>

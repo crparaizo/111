@@ -1,85 +1,165 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Svigufo - Eventos públicos e privados</title>
-    <!-- Estilos -->
-    <link rel="stylesheet" href="./assets/css/flexbox.css" />
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
 
-    <!-- Fontes -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"
-    />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Svigufo - Eventos públicos e privados</title>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="./assets/css/flexbox.css" />
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
 
-  <body>
-    <div>
-      <header class="cabecalhoPrincipal">
-        <div class="container">
-          <img src="./assets/img/icon-login.png" />
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+</head>
 
-          <nav class="cabecalhoPrincipal-nav">
-            Administrador
-          </nav>
+<body>
+  <div>
+    <header class="cabecalhoPrincipal">
+      <div class="container">
+        <img src="./assets/img/icon-login.png" />
+
+        <nav class="cabecalhoPrincipal-nav">
+          Administrador
+        </nav>
+      </div>
+    </header>
+
+    <main class="conteudoPrincipal">
+      <section class="conteudoPrincipal-cadastro">
+        <h1 class="conteudoPrincipal-cadastro-titulo">Tipos de Eventos</h1>
+        <div class="container" id="conteudoPrincipal-lista">
+          <table id="tabela-lista">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Título</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabela-lista-corpo"></tbody>
+          </table>
         </div>
-      </header>
 
-      <main class="conteudoPrincipal">
-        <section class="conteudoPrincipal-cadastro">
-          <h1 class="conteudoPrincipal-cadastro-titulo">Tipos de Eventos</h1>
-          <div class="container" id="conteudoPrincipal-lista">
-            <table id="tabela-lista">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Título</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
+        <div class="container" id="conteudoPrincipal-cadastro">
+          <h2 class="conteudoPrincipal-cadastro-titulo">
+            Cadastrar Tipo de Evento
+          </h2>
+          <form method="POST" id="form">
+            <div class="container">
+              <input type="text" id="nome-tipo-evento" placeholder="tipo do evento" />
+              <button class="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">
+                Cadastrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
 
-              <tbody id="tabela-lista-corpo"></tbody>
-            </table>
-          </div>
+    <footer class="rodapePrincipal">
+      <section class="rodapePrincipal-patrocinadores">
+        <div class="container">
+          <p>Escola SENAI de Informática - 2019</p>
+        </div>
+      </section>
+    </footer>
+  </div>
 
-          <div class="container" id="conteudoPrincipal-cadastro">
-            <h2 class="conteudoPrincipal-cadastro-titulo">
-              Cadastrar Tipo de Evento
-            </h2>
-            <form>
-              <div class="container">
-                <input
-                  type="text"
-                  id="nome-tipo-evento"
-                  placeholder="tipo do evento"
-                />
-                <button
-                  class="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
-                >
-                  Cadastrar
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </main>
+  <script>
 
-      <footer class="rodapePrincipal">
-        <section class="rodapePrincipal-patrocinadores">
-          <div class="container">
-            <p>Escola SENAI de Informática - 2019</p>
-          </div>
-        </section>
-      </footer>
-    </div>
-  </body>
+    // let tiposEventos = [
+    //   {
+    //     "id": 3,
+    //     "nome": "Linkedin"
+    //   },
+    //   {
+    //     "id": 1,
+    //     "nome": "Outro Evento"
+    //   },
+    //   {
+    //     "id": 2,
+    //     "nome": "Web Design"
+    //   }
+    // ];
+
+    //SQL Client:
+    // function sucesso() {
+    //   var data = JSON.parse(this.responseText); //Pega o texto
+    //   console.log(data);
+    //   preencherDados(data); //Pegar dados da API
+    // };
+
+    // function erro(err) {
+    //   console.log('Um erro ocorreu: ' + err, err);
+    // }
+
+    // var xhr = new XMLHttpRequest();
+    // xhr.onload = sucesso; //Sucesso
+    // xhr.onerror = erro; //Erro
+    // xhr.open('GET', 'http://192.168.4.112:5000/api/tiposeventos');
+    // xhr.send();
+
+    const URL = 'http://192.168.4.112:5000/api/tiposeventos';
+
+    function carregaListaTiposEventos() {
+      fetch(URL, { method: 'GET' }) //Como default é GET, não precisa informar o GET na chamada
+        .then(resposta => resposta.json())//Pega a resposta da API
+        .then(data => preencherDados(data))//Pega os dados da resposta e chama a função para criar tabela
+        .catch(erro => console.log('Erro Tipos Eventos', erro));//Ocorre um erro
+    }
+
+    carregaListaTiposEventos();
+
+    let tabela = document.querySelector("#tabela-lista-corpo");
+    let form = document.querySelector("#form");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let tipoEvento = {
+        nome: document.querySelector("#nome_tipo_evento").value
+      }
+
+      fetch(URL, {
+        method : 'POST',
+        body: JSON.stringify(tipoEvento),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(resposta => console.log(resposta))
+        .then(data => carregaListaTiposEventos())
+        .catch(erro => console.log(erro))
+    });
+
+    function preencherDados(tiposEventos) {
+
+      tabela.innerText = "";
+
+      tiposEventos.forEach(element => {
+        //Crir uma linha
+        let novaLinha = document.createElement("tr");
+        //Cria a coluna Id
+        let colunaId = document.createElement("td");
+        //Atribui um valor a coluna
+        colunaId.innerText = element.id;
+        //Cria a coluna Nome
+        let colunaNome = document.createElement("td");
+        //Atribui um valor a coluna
+        colunaNome.innerText = element.nome;
+
+        novaLinha.appendChild(colunaId); //Joga a coluna dentro da linha
+        novaLinha.appendChild(colunaNome); //Joga a coluna dentro da linha 
+        tabela.appendChild(novaLinha); //Joga a linha dentro da tabela
+      });
+    }
+
+  </script>
+
+</body>
+
 </html>
