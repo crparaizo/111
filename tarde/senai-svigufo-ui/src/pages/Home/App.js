@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../../assets/img/icon-login.png';
+import {Link} from 'react-router-dom';
 
 import '../../assets/css/flexbox.css' //Link href do React para importar o css
 import '../../assets/css/reset.css'
@@ -19,7 +20,7 @@ class App extends Component {
             <a>Home</a>
             <a>Eventos</a>
             <a>Contato</a>
-            <a className="cabecalhoPrincipal-nav-login" href="login.html">Login</a>
+            <Link className="cabecalhoPrincipal-nav-login" to="login" >Login</Link>
           </nav>
         </div>
       </header>

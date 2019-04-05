@@ -2,23 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './pages/Home/App'; //Mudar a rota
-import TiposEventos  from './pages/TiposEventos/TiposEventos'; //Importa o Tipos Eventos
+import TiposEventos from './pages/TiposEventos/TiposEventos'; //Importa o Tipos Eventos
 import NaoEncontrada from './pages/NaoEncontrada/NaoEncontrada'; //Importa a página NaoEncontrada
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
-import * as serviceWorker from './serviceWorker';
+import Login from './pages/Login/Login';
+import { usuarioAutenticado } from './services/auth'; 
 
-const rotas =(
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
+{/*css modules, styled components, BEM */ }
+
+const Permissao = ({ component: Component }) => ( 
+                    //convertendo que se está acessando (component do Switch)           
+    <Route
+        render={props => usuarioAutenticado() ? //Operador ternário
+            (<Component {...props} />) :
+            (<Redirect to={{ pathname: '/login', state: { from: props.location } }} />)
+        }
+    />
+);
+
+const rotas = (
     <Router>
         <div>
             <Switch>
-                <Route exact path="/" component={App}/>
-                <Route path="/tiposeventos" component={TiposEventos}/>
-                <Route component={NaoEncontrada} />
-            </Switch>            
-            
+                {/*Route*/} 
+                <Route exact path="/" component={App} />
+                <Permissao path="/tiposeventos" component={TiposEventos} />
+                <Route path="/login" component={Login} />
+                <Route component={NaoEncontrada} /> {/* Esse é o default do Switch, nenhuma outra Route será lida dps disso */}
+            </Switch>
+
         </div>
     </Router>
-
 );
 
 ReactDOM.render(rotas, document.getElementById('root'));
